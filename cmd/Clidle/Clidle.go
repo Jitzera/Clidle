@@ -8,10 +8,12 @@ var runedCorrect = []rune("")
 var guessedWord = ""
 var runedGuess = []rune("")
 var triesLeft = 5
+var correctLetters = 0
 
 var secondGuess = rune(0)
 
 func main() {
+	println("6 Tries. (-) Means incorrect, (+) Out of position, (=) Correct. Type guess:")
 	wordRNG()
 	wordScanner()
 }
@@ -35,9 +37,19 @@ func wordScanner() {
 	} else {
 		println("Invalid input.")
 	}
-	livesRemaining()
+	gameState()
 }
 
+// TODO add timer and how many tries it took
+func gameState() {
+	if correctLetters == 5 {
+		println("")
+		println("win")
+	} else {
+		correctLetters = 0
+		livesRemaining()
+	}
+}
 func livesRemaining() {
 	if triesLeft != 0 {
 		triesLeft--
@@ -60,6 +72,7 @@ func wordVerifier() {
 	for letterCount < 5 {
 
 		if runedGuess[letterCount] == runedCorrect[letterCount] {
+			correctLetters++
 			print("=")
 		} else {
 			secondGuess = runedGuess[letterCount]
