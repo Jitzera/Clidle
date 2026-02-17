@@ -7,6 +7,8 @@ var runedCorrect = []rune("")
 var guessedWord = ""
 var runedGuess = []rune("")
 
+var secondGuess = rune(0)
+
 func main() {
 	wordRNG()
 	wordScanner()
@@ -16,7 +18,7 @@ func main() {
 // ability to read wordbank from a different file
 func wordRNG() {
 	//[...]wordBank{"water", "quake"}
-	correctWord = "water"
+	correctWord = "quake"
 	runedCorrect = []rune(correctWord)
 }
 
@@ -37,15 +39,35 @@ func wordScanner() {
 // would require storing the print until the end to overwite
 
 func wordVerifier() {
-	count := 0
-	for count < 5 {
+	letterCount := 0
+	for letterCount < 5 {
 
-		if runedGuess[count] == runedCorrect[count] {
+		if runedGuess[letterCount] == runedCorrect[letterCount] {
 			print("=")
 		} else {
-			print("-")
+			secondGuess = runedGuess[letterCount]
+			otherPositionChecker()
+			if yesPrint == true {
+				print("+")
+			} else {
+				print("-")
+			}
 		}
-		count++
+		letterCount++
+	}
+
+}
+
+var yesPrint = false
+
+func otherPositionChecker() {
+	secCount := 0
+	yesPrint = false
+	for secCount < 5 {
+		if secondGuess == runedCorrect[secCount] {
+			yesPrint = true
+		}
+		secCount++
 	}
 
 }
