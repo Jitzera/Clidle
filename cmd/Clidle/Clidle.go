@@ -2,10 +2,12 @@ package main
 
 import "fmt"
 
+var yesPrint = false
 var correctWord = ""
 var runedCorrect = []rune("")
 var guessedWord = ""
 var runedGuess = []rune("")
+var triesLeft = 5
 
 var secondGuess = rune(0)
 
@@ -33,6 +35,21 @@ func wordScanner() {
 	} else {
 		println("Invalid input.")
 	}
+	livesRemaining()
+}
+
+func livesRemaining() {
+	if triesLeft != 0 {
+		triesLeft--
+		println("")
+		wordScanner()
+	} else {
+		quit()
+	}
+}
+
+func quit() {
+
 }
 
 //store incorrect letter in a bank?
@@ -57,8 +74,6 @@ func wordVerifier() {
 	}
 
 }
-
-var yesPrint = false
 
 func otherPositionChecker() {
 	secCount := 0
