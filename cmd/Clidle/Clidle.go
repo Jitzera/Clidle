@@ -1,6 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand/v2"
+)
+
+var wordBank = [...]string{"aback", "abase", "abate", "abbey", "abbot", "abhor"}
 
 var yesPrint = false
 var correctWord = ""
@@ -9,7 +14,6 @@ var guessedWord = ""
 var runedGuess = []rune("")
 var triesLeft = 5
 var correctLetters = 0
-
 var secondGuess = rune(0)
 
 func main() {
@@ -18,14 +22,15 @@ func main() {
 	wordScanner()
 }
 
-// TODO add an array of words and an RNG to select one at random
 // ability to read wordbank from a different file
 func wordRNG() {
-	//[...]wordBank{"water", "quake"}
-	correctWord = "quake"
+	wordCount := len(wordBank)
+	randIndex := rand.IntN(wordCount)
+	correctWord = wordBank[randIndex]
 	runedCorrect = []rune(correctWord)
 }
 
+// TODO only allow words in wordbank
 func wordScanner() {
 	keyScan := ""
 	fmt.Scanln(&keyScan)
@@ -43,8 +48,7 @@ func wordScanner() {
 // TODO add timer and how many tries it took
 func gameState() {
 	if correctLetters == 5 {
-		println("")
-		println("win")
+		fmt.Println("\nwin")
 	} else {
 		correctLetters = 0
 		livesRemaining()
@@ -56,16 +60,13 @@ func livesRemaining() {
 		println("")
 		wordScanner()
 	} else {
+		fmt.Printf("\nLost. The word was %v.", correctWord)
 		quit()
 	}
 }
 
 func quit() {
-
 }
-
-//store incorrect letter in a bank?
-// would require storing the print until the end to overwite
 
 func wordVerifier() {
 	letterCount := 0
