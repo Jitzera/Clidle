@@ -12,7 +12,10 @@ func main() {
 	wordScanner()
 }
 
+// TODO add an array of words and an RNG to select one at random
+// ability to read wordbank from a different file
 func wordRNG() {
+	//[...]wordBank{"water", "quake"}
 	correctWord = "water"
 	runedCorrect = []rune(correctWord)
 }
@@ -24,23 +27,25 @@ func wordScanner() {
 	runedGuess = []rune(guessedWord)
 
 	if len(guessedWord) == 5 {
-		println(guessedWord)
 		wordVerifier()
 	} else {
 		println("Invalid input.")
 	}
 }
 
+//store incorrect letter in a bank?
+// would require storing the print until the end to overwite
+
 func wordVerifier() {
 	count := 0
 	for count < 5 {
-		//print(runedGuess[count])
-		//print(runedCorrect[count])
+
 		if runedGuess[count] == runedCorrect[count] {
-			println("c")
+			print("=")
+		} else {
+			print("-")
 		}
 		count++
 	}
-	println("lamo")
 
 }
