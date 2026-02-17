@@ -7,14 +7,14 @@ import (
 
 var wordBank = [...]string{"aback", "abase", "abate", "abbey", "abbot", "abhor"}
 
-var yesPrint = false
+var letterInWord = false
 var correctWord = ""
 var runedCorrect = []rune("")
 var guessedWord = ""
 var runedGuess = []rune("")
 var triesLeft = 5
 var correctLetters = 0
-var secondGuess = rune(0)
+var incorrectLetter = rune(0)
 
 func main() {
 	println("6 Tries. (-) Means incorrect, (+) Out of position, (=) Correct. Type guess:")
@@ -69,34 +69,34 @@ func quit() {
 }
 
 func wordVerifier() {
-	letterCount := 0
-	for letterCount < 5 {
+	letterIndex := 0
+	for letterIndex < 5 {
 
-		if runedGuess[letterCount] == runedCorrect[letterCount] {
+		if runedGuess[letterIndex] == runedCorrect[letterIndex] {
 			correctLetters++
 			print("=")
 		} else {
-			secondGuess = runedGuess[letterCount]
+			incorrectLetter = runedGuess[letterIndex]
 			otherPositionChecker()
-			if yesPrint == true {
+			if letterInWord == true {
 				print("+")
 			} else {
 				print("-")
 			}
 		}
-		letterCount++
+		letterIndex++
 	}
 
 }
 
 func otherPositionChecker() {
-	secCount := 0
-	yesPrint = false
-	for secCount < 5 {
-		if secondGuess == runedCorrect[secCount] {
-			yesPrint = true
+	Count := 0
+	letterInWord = false
+	for Count < 5 {
+		if incorrectLetter == runedCorrect[Count] {
+			letterInWord = true
 		}
-		secCount++
+		Count++
 	}
 
 }
