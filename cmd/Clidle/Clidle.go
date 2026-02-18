@@ -5,9 +5,13 @@ import (
 	"math/rand/v2"
 )
 
+var correctSlice = make([]int, 5)
+var guessSlice = make([]int, 5)
+
 var wordBank = [...]string{"aback", "abase", "abate", "abbey", "abbot", "abhor"}
 
 var letterInWord = false
+var letterInWordCount = 0
 var correctWord = ""
 var runedCorrect = []rune("")
 var guessedWord = ""
@@ -27,7 +31,8 @@ func wordRNG() {
 	wordCount := len(wordBank)
 	randIndex := rand.IntN(wordCount)
 	correctWord = wordBank[randIndex]
-	runedCorrect = []rune(correctWord)
+	debugWord := "xxxxb"
+	runedCorrect = []rune(debugWord)
 }
 
 // TODO only allow words in wordbank
@@ -38,11 +43,12 @@ func wordScanner() {
 	runedGuess = []rune(guessedWord)
 
 	if len(guessedWord) == 5 {
-		wordVerifier()
+		//wordVeri//make var for each letter in word?fier()
+		wordChecker()
 	} else {
 		println("Invalid input.")
+		wordScanner()
 	}
-	gameState()
 }
 
 // TODO add timer and how many tries it took
@@ -56,6 +62,7 @@ func gameState() {
 }
 func livesRemaining() {
 	if triesLeft != 0 {
+		fmt.Printf(" Tries left:%v", triesLeft)
 		triesLeft--
 		println("")
 		wordScanner()
@@ -68,6 +75,7 @@ func livesRemaining() {
 func quit() {
 }
 
+// TODO add repeated letter detection
 func wordVerifier() {
 	letterIndex := 0
 	for letterIndex < 5 {
@@ -75,11 +83,13 @@ func wordVerifier() {
 		if runedGuess[letterIndex] == runedCorrect[letterIndex] {
 			correctLetters++
 			print("=")
+			//make slice add guessed letters into it to prevent duplication
 		} else {
 			incorrectLetter = runedGuess[letterIndex]
 			otherPositionChecker()
 			if letterInWord == true {
 				print("+")
+				letterInWord = false
 			} else {
 				print("-")
 			}
@@ -87,6 +97,7 @@ func wordVerifier() {
 		letterIndex++
 	}
 
+	gameState()
 }
 
 func otherPositionChecker() {
@@ -97,6 +108,24 @@ func otherPositionChecker() {
 			letterInWord = true
 		}
 		Count++
+	}
+
+}
+
+// make var for each letter in word?
+// func to add a letter to a variable
+// loops over all variables to see if it exists
+// if yes add to it once
+// if not add to an empty
+// on check same in reverse but subtract each
+
+func wordChecker() {
+
+	for i := range 5 {
+		if runedGuess[i] == runedCorrect[i] {
+			//print("real")
+			fmt.Print(runedGuess[i])
+		}
 	}
 
 }
