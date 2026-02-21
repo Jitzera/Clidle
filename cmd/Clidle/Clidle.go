@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math/rand/v2"
+	"slices"
 )
 
 var wordBank = [...]string{"aback", "abase", "abate", "abbey", "abbot", "abhor"}
@@ -39,6 +40,7 @@ func insertScanner() {
 
 	if len(guessedWord) == 5 {
 		//wordVeri//make var for each letter in word?fier()
+		wordVerify()
 	} else {
 		println("Invalid input.")
 	}
@@ -46,9 +48,18 @@ func insertScanner() {
 
 func wordVerify() {
 	sliceGuessInventory := runedGuess
+	LettersLeft := len(sliceGuessInventory)
+	println(LettersLeft)
 
-	for i := range 5 {
-
+	letterIndex := 0
+	for i := range LettersLeft {
+		println(i)
+		if sliceGuessInventory[letterIndex] == runedCorrect[letterIndex] {
+			print(letterIndex)
+			fmt.Println(sliceGuessInventory)
+			sliceGuessInventory = slices.Delete(sliceGuessInventory, letterIndex, letterIndex+1)
+			fmt.Println(sliceGuessInventory)
+		}
 	}
 
 }
