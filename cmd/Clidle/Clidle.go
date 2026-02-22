@@ -13,8 +13,8 @@ var runedCorrect = []rune("")
 var guessedWord = ""
 var runedGuess = []rune("")
 
-var triesLeft = 5
-var correctLetters = 0
+//var triesLeft = 5
+//var correctLetters = 0
 
 func main() {
 	println("6 Tries. (-) Means incorrect, (+) Out of position, (=) Correct. Type guess:")
@@ -39,45 +39,51 @@ func insertScanner() {
 	runedGuess = []rune(guessedWord)
 
 	if len(guessedWord) == 5 {
-		//wordVeri//make var for each letter in word?fier()
 		wordVerify()
 	} else {
 		println("Invalid input.")
 	}
 }
 
-var inventoryLength = 0
-var guessSliceInventory = runedGuess
+var inventoryLength = 5
+var incorrectLetters = 0
+var guessSliceInventory = []rune("")
+
+//dep incor letter
 
 func wordVerify() {
-	guessSliceInventory = runedGuess
+	guessSliceInventory = slices.Clone(runedGuess)
 	inventoryLength = len(guessSliceInventory)
-	letterIndex := 0
-
-	for range inventoryLength {
-		if guessSliceInventory[letterIndex] == runedCorrect[letterIndex] {
-			guessSliceInventory = slices.Delete(guessSliceInventory, letterIndex, letterIndex+1)
+	for i := range inventoryLength {
+		print(i)
+		fmt.Print(guessSliceInventory)
+		if runedGuess[i] == runedCorrect[i] {
+			guessSliceInventory = slices.Delete(guessSliceInventory, incorrectLetters, incorrectLetters+1)
 			inventoryLength = len(guessSliceInventory)
 			print("=")
 		} else {
-			yellowChecker()
-			break
+			//incorrectLetters++
+			//yellowChecker()
 		}
 
 	}
 
-}
-
-func yellowChecker() {
-	for i := range inventoryLength {
-		fmt.Print(guessSliceInventory)
-		if guessSliceInventory[i] == runedCorrect[i] {
-			print("Y")
-		}
-	}
 }
 
 /*
+	func yellowChecker() {
+		//	for i := range inventoryLength {
+		//		if guessSliceInventory[0] == runedCorrect[i] {
+		//		}
+		//	}
+	}
+
+	func wrongPrint() {
+		//print("-")
+		//wordVerify()
+		// drop inventory
+	}
+
 // TODO add timer and how many tries it took
 
 	func gameState() {
