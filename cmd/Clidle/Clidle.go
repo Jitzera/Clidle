@@ -27,7 +27,7 @@ func wordRNG() {
 	wordCount := len(wordBank)
 	randIndex := rand.IntN(wordCount)
 	correctWord = wordBank[randIndex]
-	debugWord := "xxxxb"
+	debugWord := "water"
 	runedCorrect = []rune(debugWord)
 }
 
@@ -46,45 +46,60 @@ func insertScanner() {
 	}
 }
 
-func wordVerify() {
-	sliceGuessInventory := runedGuess
-	LettersLeft := len(sliceGuessInventory)
-	println(LettersLeft)
+var inventoryLength = 0
+var guessSliceInventory = runedGuess
 
+func wordVerify() {
+	guessSliceInventory = runedGuess
+	inventoryLength = len(guessSliceInventory)
 	letterIndex := 0
-	for i := range LettersLeft {
-		println(i)
-		if sliceGuessInventory[letterIndex] == runedCorrect[letterIndex] {
-			print(letterIndex)
-			fmt.Println(sliceGuessInventory)
-			sliceGuessInventory = slices.Delete(sliceGuessInventory, letterIndex, letterIndex+1)
-			fmt.Println(sliceGuessInventory)
+
+	for range inventoryLength {
+		if guessSliceInventory[letterIndex] == runedCorrect[letterIndex] {
+			guessSliceInventory = slices.Delete(guessSliceInventory, letterIndex, letterIndex+1)
+			inventoryLength = len(guessSliceInventory)
+			print("=")
+		} else {
+			yellowChecker()
+			break
+		}
+
+	}
+
+}
+
+func yellowChecker() {
+	for i := range inventoryLength {
+		fmt.Print(guessSliceInventory)
+		if guessSliceInventory[i] == runedCorrect[i] {
+			print("Y")
+		}
+	}
+}
+
+/*
+// TODO add timer and how many tries it took
+
+	func gameState() {
+		if correctLetters == 5 {
+			fmt.Println("\nwin")
+		} else {
+			correctLetters = 0
+			livesRemaining()
 		}
 	}
 
-}
-
-// TODO add timer and how many tries it took
-func gameState() {
-	if correctLetters == 5 {
-		fmt.Println("\nwin")
-	} else {
-		correctLetters = 0
-		livesRemaining()
+	func livesRemaining() {
+		if triesLeft != 0 {
+			fmt.Printf(" Tries left:%v", triesLeft)
+			triesLeft--
+			println("")
+			insertScanner()
+		} else {
+			fmt.Printf("\nLost. The word was %v.", correctWord)
+			quit()
+		}
 	}
-}
-
-func livesRemaining() {
-	if triesLeft != 0 {
-		fmt.Printf(" Tries left:%v", triesLeft)
-		triesLeft--
-		println("")
-		insertScanner()
-	} else {
-		fmt.Printf("\nLost. The word was %v.", correctWord)
-		quit()
-	}
-}
-
+*/
 func quit() {
 }
