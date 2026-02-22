@@ -55,12 +55,12 @@ func wordVerify() {
 	guessSliceInventory = slices.Clone(runedGuess)
 	inventoryLength = len(guessSliceInventory)
 	for i := range inventoryLength {
-		print(i)
-		fmt.Print(guessSliceInventory)
 		if runedGuess[i] == runedCorrect[i] {
 			guessSliceInventory = slices.Delete(guessSliceInventory, incorrectLetters, incorrectLetters+1)
 			inventoryLength = len(guessSliceInventory)
 			print("=")
+			print(i)
+			fmt.Print(guessSliceInventory)
 		} else {
 			//incorrectLetters++
 			//yellowChecker()
