@@ -59,7 +59,6 @@ func wordVerify() {
 			guessSliceInventory = slices.Delete(guessSliceInventory, incorrectLetters, incorrectLetters+1)
 			inventoryLength = len(guessSliceInventory)
 			print("=")
-			print(i)
 			fmt.Print(guessSliceInventory)
 		} else {
 			//incorrectLetters++
@@ -71,9 +70,12 @@ func wordVerify() {
 }
 
 func yellowChecker() {
-	for i := range inventoryLength {
-		print("real")
-		if guessSliceInventory[i] == runedCorrect[i] {
+	inventoryLength = len(guessSliceInventory)
+	for i := range 5 {
+		if runedCorrect[i] == guessSliceInventory[0] {
+			print("real")
+			guessSliceInventory = slices.Delete(guessSliceInventory, incorrectLetters, incorrectLetters+1)
+			fmt.Print(guessSliceInventory)
 		}
 	}
 }
