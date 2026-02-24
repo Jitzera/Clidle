@@ -63,27 +63,28 @@ func wordVerify() {
 			fmt.Print(guessSliceInventory)
 		} else {
 			//incorrectLetters++
-			//yellowChecker()
+			yellowChecker()
 		}
 
 	}
 
 }
 
+func yellowChecker() {
+	for i := range inventoryLength {
+		print("real")
+		if guessSliceInventory[i] == runedCorrect[i] {
+		}
+	}
+}
+
+func wrongPrint() {
+	//print("-")
+	//wordVerify()
+	// drop inventory
+}
+
 /*
-	func yellowChecker() {
-		//	for i := range inventoryLength {
-		//		if guessSliceInventory[0] == runedCorrect[i] {
-		//		}
-		//	}
-	}
-
-	func wrongPrint() {
-		//print("-")
-		//wordVerify()
-		// drop inventory
-	}
-
 // TODO add timer and how many tries it took
 
 	func gameState() {
