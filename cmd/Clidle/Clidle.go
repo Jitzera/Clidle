@@ -52,17 +52,17 @@ var correctSliceInventory = []rune("")
 func wordVerify() {
 	guessSliceInventory = slices.Clone(runedGuess)
 	correctSliceInventory = slices.Clone(runedCorrect)
+	fmt.Print(runedCorrect)
 
 	inventoryLength = len(guessSliceInventory)
 	for i := range 5 {
 		if runedGuess[i] == runedCorrect[i] {
 			guessSliceInventory = slices.Delete(guessSliceInventory, 0, 1) //Err
 			inventoryLength = len(guessSliceInventory)
-			print(i)
 			correctSliceInventory = slices.Delete(correctSliceInventory, 0, 1) //Err
 			//fmt.Print(correctSliceInventory)
 			print("=")
-			fmt.Print(guessSliceInventory)
+			//fmt.Print(guessSliceInventory)
 		} else {
 			//incorrectLetters++
 			yellowChecker()
@@ -72,14 +72,18 @@ func wordVerify() {
 
 }
 
+// Add correct deletion position
 func yellowChecker() {
-	inventoryLength = len(guessSliceInventory)
-	for i := range 5 {
-		if runedCorrect[i] == guessSliceInventory[0] {
+	inventoryLength = len(correctSliceInventory)
+	for i := range inventoryLength {
+		if correctSliceInventory[i] == guessSliceInventory[0] {
+			//add sensor to see what letter is recognized
 			print("real")
+			fmt.Print(correctSliceInventory)
 			guessSliceInventory = slices.Delete(guessSliceInventory, 0, 1)
 			correctSliceInventory = slices.Delete(correctSliceInventory, 0, 1)
-			//fmt.Print(guessSliceInventory)
+			fmt.Print(correctSliceInventory)
+			break
 		}
 	}
 }
