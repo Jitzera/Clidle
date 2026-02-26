@@ -46,18 +46,21 @@ func insertScanner() {
 }
 
 var inventoryLength = 5
-var incorrectLetters = 0
 var guessSliceInventory = []rune("")
-
-//dep incor letter
+var correctSliceInventory = []rune("")
 
 func wordVerify() {
 	guessSliceInventory = slices.Clone(runedGuess)
+	correctSliceInventory = slices.Clone(runedCorrect)
+
 	inventoryLength = len(guessSliceInventory)
-	for i := range inventoryLength {
+	for i := range 5 {
 		if runedGuess[i] == runedCorrect[i] {
-			guessSliceInventory = slices.Delete(guessSliceInventory, incorrectLetters, incorrectLetters+1)
+			guessSliceInventory = slices.Delete(guessSliceInventory, 0, 1) //Err
 			inventoryLength = len(guessSliceInventory)
+			print(i)
+			correctSliceInventory = slices.Delete(correctSliceInventory, 0, 1) //Err
+			//fmt.Print(correctSliceInventory)
 			print("=")
 			fmt.Print(guessSliceInventory)
 		} else {
@@ -74,8 +77,9 @@ func yellowChecker() {
 	for i := range 5 {
 		if runedCorrect[i] == guessSliceInventory[0] {
 			print("real")
-			guessSliceInventory = slices.Delete(guessSliceInventory, incorrectLetters, incorrectLetters+1)
-			fmt.Print(guessSliceInventory)
+			guessSliceInventory = slices.Delete(guessSliceInventory, 0, 1)
+			correctSliceInventory = slices.Delete(correctSliceInventory, 0, 1)
+			//fmt.Print(guessSliceInventory)
 		}
 	}
 }
